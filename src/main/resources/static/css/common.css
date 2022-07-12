@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+body{
+	padding:40px 30px 0;
+}
+.w-rem-6{
+	width:6rem;
+}
+#mainContentArea{
+	min-height:62vh;
+}
+.border-bottom-currentColor{
+	border-bottom-color:currentColor;
+}
+.pointer{
+	cursor:pointer;
+}
+.hide{
+	display:none !important;
+}
+.show{
+	display:block !important;
+}
+.wide-vw{
+	width:134vw;
+}
+.fs-7{
+	font-size:0.8rem !important;
+}
+.wp-135{
+	width:135px;
+}

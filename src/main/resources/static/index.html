@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1"> -->
+
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="/js/jquery.form.js"></script>
+<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="shortcut icon" href="#">
+
+<!-- datatable button -->
+<link href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet">
+<link href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+        <div class="container-fluid border bg-light p-3 mb-3">
+          <div class="row">
+            <div class="col-3 text-center nav-link text-center text-dark">파일검사시스템</div>
+            <div class="col-8">
+              <ul class="nav nav-pills nav-fill">
+                <li class="nav-item">
+                  <a class="nav-link active" data-toggle="tab" href="#qwe">기본검사</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#asd">비교검사</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#zxc">해시검사</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#gds">리포트</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#ayd">시스템검사</a>
+                </li>
+              </ul>
+          </div>
+        </div>
+      </div>
+        <div class="container-fluid border bg-light p-3 mb-3">
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="qwe">
+              <div class="container-fluid border bg-light p-2">
+      			<div class="d-flex">
+      				<div class="d-flex flex-grow-1 align-items-center">
+      					<div class="input-group me-3">
+      						<label class="input-group-text" for="checkedProject">프로젝트명</label>
+      						<select id="checkedProject" class="form-select form-select-sm">
+      							<option value="none" selected>프로젝트명을 선택하세요.</option>
+      						</select>
+      					</div>
+      					<div class="input-group me-3 w-50">
+      						<label class="input-group-text" for="fileCntEqFl">일치여부</label>
+      						<select id="fileCntEqFl" class="form-select form-select-sm">
+      							<option value="" selected>전체</option>
+      							<option value="Y">정상</option>
+      							<option value="N">오류</option>
+      						</select>
+      					</div>
+      				</div>
+      				<div class="d-flex justify-content-end">
+      					<button type="button" id="btnSaveExcel" class="btn btn-secondary btn-sm ms-4">엑셀저장</button>
+      					<button type="button" id="btnSearchDocs" class="btn btn-secondary btn-sm ms-2">검색</button>
+      				</div>
+      			</div>
+      		  </div>
+              <div class="container-fluid p-0 mt-3">
+                  <div class="table-responsive">
+                    <table class="table dataTable mt-0" id="shopAnalysis">
+                      <thead>
+      					<tr class="align-middle text-center">
+      						<th scope="col" rowspan="2" class="border border-secondary">순번</th>
+      						<th scope="col" rowspan="2" class="border border-secondary">대통령</th>
+      						<th scope="col" rowspan="2" class="border border-secondary">관리번호</th>
+      						<th scope="col" rowspan="2" class="border border-secondary">건번호</th>
+      						<th scope="col" rowspan="2" class="border border-secondary">면수</th>
+      						<th scope="col" colspan="2" class="border border-secondary">파일수량(면수)</th>
+      						<th scope="col" rowspan="2" class="border border-secondary">
+      							<div class="d-flex flex-column">
+      								<span>파일수량</span>
+      								<span>일치여부</span>
+      							</div>
+      						</th>
+      					</tr>
+      					<tr class="align-middle text-center">
+      						<th scope="col" class="border border-secondary">TIFF</th>
+      						<th scope="col" class="border border-secondary">PDF</th>
+      					</tr>
+      				  </thead>
+                    </table>
+                  </div>
+               </div>
+            </div>
+            
+            
+            <div class="tab-pane fade" id="asd">
+          
+              <div class="container-fluid border bg-light p-2">
+      			<div class="d-flex">
+      				<div class="d-flex flex-grow-1 align-items-center">
+      					<div class="input-group me-3 w-50">
+      						<label class="input-group-text" for="checkedProject">프로젝트명</label>
+      						<select id="checkedProject" name="id" class="form-select form-select-sm">
+      							<option value="none" selected>프로젝트명을 선택하세요.</option>
+      						</select>
+      					</div>
+      				</div>
+      			</div>
+      			<div class="d-flex mt-2">
+      				<div class="d-flex flex-grow-1 align-items-center">
+      					<div class="input-group me-3">
+      						<label class="input-group-text" for="fileNmErrFl_tiff">파일명오류여부(TIFF)</label>
+      						<select id="fileNmErrFl_tiff" name="file_nm_err_fl_tiff" class="form-select form-select-sm">
+      							<option value="" selected>전체</option>
+      							<option value="N">정상</option>
+      							<option value="Y">오류</option>
+      						</select>
+      					</div>
+      					<div class="input-group me-3">
+      						<label class="input-group-text" for="fileNmErrFl_pdf">파일명오류여부(PDF)</label>
+      						<select id="fileNmErrFl_pdf" name="file_nm_err_fl_pdf" class="form-select form-select-sm">
+      							<option value="" selected>전체</option>
+      							<option value="N">정상</option>
+      							<option value="Y">오류</option>
+      						</select>
+      					</div>
+      					<div class="input-group me-3">
+      						<label class="input-group-text" for="fileErrFl_tiff">파일이상여부(TIFF)</label>
+      						<select id="fileErrFl_tiff" name="file_err_fl_tiff" class="form-select form-select-sm">
+      							<option value="" selected>전체</option>
+      							<option value="N">정상</option>
+      							<option value="Y">오류</option>
+      						</select>
+      					</div>
+      					<div class="input-group">
+      						<label class="input-group-text" for="fileErrFl_pdf">파일이상여부(PDF)</label>
+      						<select id="fileErrFl_pdf" name="file_err_fl_pdf" class="form-select form-select-sm">
+      							<option value="" selected>전체</option>
+      							<option value="N">정상</option>
+      							<option value="Y">오류</option>
+      						</select>
+      					</div>
+      				</div>
+      			</div>
+      			<div class="d-flex justify-content-end mt-2">
+      				<button type="button" id="btnSaveExcel" class="btn btn-secondary btn-sm ms-4">엑셀저장</button>
+      				<button type="button" id="btnSearchCampare" class="btn btn-secondary btn-sm ms-2">검색</button>
+      				<button type="button" id="btnViewMore" class="btn btn-secondary btn-sm ms-2" disabled>더보기</button>
+      				<button type="button" id="btnHideMore" class="btn btn-secondary btn-sm ms-2 hide">숨기기</button>
+      			</div>
+      		</div>
+              <br>
+              <div class="row">
+                <!-- Default Card Example -->
+                <div class="card mb-12">
+                  <!-- 이번주 매출현황 -->
+                  <div class="card shadow mb-4">
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table class="table dataTable mt-0" id="shopAnalysis1">
+                          <thead>
+        					<tr class="align-middle text-center">
+        						<th scope="col" rowspan="2" class="border border-secondary">순번</th>
+        						<th scope="col" rowspan="2" class="border border-secondary">대통령</th>
+        						<th scope="col" rowspan="2" class="border border-secondary">관리번호</th>
+        						<th scope="col" rowspan="2" class="border border-secondary">건번호</th>
+        						<th scope="col" colspan="2" class="border border-secondary">파일명</th>
+        						<th scope="col" colspan="2" class="border border-secondary">파일명오류<br>(정상: O, 오류: X)</th>
+        						<th scope="col" colspan="2" class="border border-secondary">파일이상여부<br>(정상: O, 오류: X)</th>
+        						<th scope="col" colspan="2" class="border border-secondary view-more hide">이미지사이즈(pixel)<br>(가로x세로)</th>
+        						<th scope="col" colspan="2" class="border border-secondary view-more hide">용량<br>(byte)</th>
+        						<th scope="col" colspan="2" class="border border-secondary view-more hide">DPI<br>(기준: 400)</th>
+        						<th scope="col" colspan="2" class="border border-secondary view-more hide">압축방식<br>(기준: LZW)</th>
+        					</tr>
+        					<tr class="align-middle text-center">
+        						<th scope="col" class="border border-secondary">TIFF</th>
+        						<th scope="col" class="border border-secondary">PDF</th>
+        						<th scope="col" class="border border-secondary">TIFF</th>
+        						<th scope="col" class="border border-secondary">PDF</th>
+        						<th scope="col" class="border border-secondary">TIFF</th>
+        						<th scope="col" class="border border-secondary">PDF</th>
+        						<th scope="col" class="view-more border border-secondary hide">TIFF</th>
+        						<th scope="col" class="view-more border border-secondary hide">PDF</th>
+        						<th scope="col" class="view-more border border-secondary hide">TIFF</th>
+        						<th scope="col" class="view-more border border-secondary hide">PDF</th>
+        						<th scope="col" class="view-more border border-secondary hide">TIFF</th>
+        						<th scope="col" class="view-more border border-secondary hide">PDF</th>
+        						<th scope="col" class="view-more border border-secondary hide">TIFF</th>
+        						<th scope="col" class="view-more border border-secondary hide">PDF</th>
+        					</tr>
+        				  </thead>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            
+            
+            <div class="tab-pane fade" id="zxc">
+          
+              <div class="row py-1" style="background-color: #FFFFCC; border-color:#b7b9cc; border:1px solid;">
+                <div class="col-7">
+                  <span class="badge badge-secondary">프로젝트명2</span>
+                  <select class="form-control" id="StoreList4">
+                  </select>
+                </div>
+                
+                <div class="col-3">
+                  <span class="badge badge-secondary">일치여부</span>
+                  <select class="form-control" id="StoreList5">
+                  </select>
+                </div>
+                
+                <div class="col-2" style="text-align: right;">
+                  <button type="button" class="btn btn-dark btn-sm" style="margin-left: 5px;">해시등록</button>
+                  <button type="button" class="btn btn-dark btn-sm" style="margin-left: 5px;">엑셀저장</button>
+                  <button type="button" class="btn btn-dark btn-sm" style="margin-left: 5px;">검색</button>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <!-- Default Card Example -->
+                <div class="card mb-12">
+                  <!-- 이번주 매출현황 -->
+                  <div class="card shadow mb-4">
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table class="table dataTable mt-0" id="shopAnalysis2">
+                          <thead class="bg-gray-500">
+                            <tr>
+                              <th class="text-white">순번</th>
+                              <th class="text-white">대통령</th>
+                              <th class="text-white">관리번호</th>
+                              <th class="text-white">건번호</th>
+                              <th class="text-white">면수</th>
+                              <th class="text-white">카드금액</th>
+                              <th class="text-white">현영금액</th>
+                              <th class="text-white">기타금액</th>
+                              <th class="text-white">포인트사용</th>
+                            </tr>
+                          </thead>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            
+            <div class="tab-pane fade" id="gds">
+          
+              <div class="row py-1" style="background-color: #FFFFCC; border-color:#b7b9cc; border:1px solid;">
+                <div class="col-7">
+                  <span class="badge badge-secondary">프로젝트명3</span>
+                  <select class="form-control" id="StoreList6">
+                  </select>
+                </div>
+                
+                <div class="col-3">
+                </div>
+                
+                <div class="col-2" style="text-align: right;">
+                  <button type="button" class="btn btn-dark btn-sm" style="margin-left: 5px;">검사결과</button>
+                  <button type="button" class="btn btn-dark btn-sm" style="margin-left: 5px;">엑셀저장</button>
+                  <button type="button" class="btn btn-dark btn-sm" style="margin-left: 5px;">검색</button>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <!-- Default Card Example -->
+                <div class="card mb-12">
+                  <!-- 이번주 매출현황 -->
+                  <div class="card shadow mb-4">
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table class="table dataTable mt-0" id="shopAnalysis3">
+                          <thead class="bg-gray-500">
+                            <tr>
+                              <th class="text-white">순번</th>
+                              <th class="text-white">대통령</th>
+                              <th class="text-white">관리번호</th>
+                              <th class="text-white">건번호</th>
+                              <th class="text-white">면수</th>
+                              <th class="text-white">카드금액</th>
+                              <th class="text-white">현영금액</th>
+                              <th class="text-white">기타금액</th>
+                              <th class="text-white">포인트사용</th>
+                            </tr>
+                          </thead>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            
+            <div class="tab-pane fade" id="ayd">
+          
+              <div class="row py-1" style="background-color: #FFFFCC; border-color:#b7b9cc; border:1px solid;">
+                <div style="width:100%; float:right; display: flex; justify-content: flex-end; margin-right: 1%;">
+              
+                  <button type="button" class="btn btn-dark btn-sm" style="margin-left: 5px;">등록</button>
+                  <button type="button" class="btn btn-dark btn-sm" style="margin-left: 5px;">수정</button>
+                  <button type="button" class="btn btn-dark btn-sm" style="margin-left: 5px;">삭제</button>
+                  <button type="button" class="btn btn-dark btn-sm" style="margin-left: 5px;">검사</button>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <!-- Default Card Example -->
+                <div class="card mb-12">
+                  <!-- 이번주 매출현황 -->
+                  <div class="card shadow mb-4">
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table class="table dataTable mt-0" id="shopAnalysis4">
+                          <thead class="bg-gray-500">
+                            <tr>
+                              <th class="text-white">순번</th>
+                              <th class="text-white">대통령</th>
+                              <th class="text-white">관리번호</th>
+                              <th class="text-white">건번호</th>
+                              <th class="text-white">면수</th>
+                              <th class="text-white">카드금액</th>
+                              <th class="text-white">현영금액</th>
+                              <th class="text-white">기타금액</th>
+                              <th class="text-white">포인트사용</th>
+                            </tr>
+                          </thead>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+        <!-- /.container-fluid -->
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top"> <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+  <!-- datepicker -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap-datepicker.kr.min.js" type="text/javascript"></script>
+
+  <!-- select2 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
+
+  <!-- datatable plugins -->
+  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/select/1.2.1/js/dataTables.select.min.js"></script>
+  
+  <!-- tabulator js -->
+  <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.0.5/dist/js/tabulator.min.js"></script>
+  
+  <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+  <script src="https://cdn.datatables.net/plug-ins/1.11.3/filtering/type-based/phoneNumber.js"></script>
+  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="vendor/chart.js/Chart.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+  <script src="js/common/common.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="js/app-context.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
