@@ -2,7 +2,7 @@
 
 const alertContent = document.getElementById('alertContent');
 const alertByModal = function (...texts) {
-	let content = ``;
+	let content = '';
 	texts.forEach(text => content += `${text}<br>`);
 	alertContent.innerHTML = content;
 	$('#staticBackdrop').modal('show');
